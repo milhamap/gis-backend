@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "project-gis-2192c",
+  "private_key_id": "13364b6f03f23a6494caf0838eddcedc3fed4642",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCuVAZxNBezmunN\nwmI9s80kCW/umP2Za99Ofz0TDr2iFh4NMrA4GhlHOpysBkG408vqQXejs0crr/eR\nhBzGdfFwfeOvLIDukgaNj+pfwxmJB+ucOg08dHhbXlPzjyaUU2VrdQw/CcV+T3Ef\nZE7w7WvLinGvbp/4qyYGJLs6Dw6wZuJHcd5u9wDPV/rVgeXeD/r1ducjptrKyN6g\nvA+lOx1l9mXG5UaMHrShuihVwV0c9B9iwxlpRrxf2y84lxwOhvmPvLTFOZNyt9Ld\nRN0JNeoN8KMygnX/TdFdckfCvuy+B2uf7ettwd2l3EYR5ZOMng05SI7mHeRP0La7\nYTnpxsyvAgMBAAECggEAF8NZa3X74x4zT7p3FM0dIhPtP5t4OkEjm/opM59XRzB3\noTnvHn6kQnrhX2us6spoKgMJkXV/NpvShfH50C3Enx5x+m95Fcwu+34KJ0qbgPvk\n6JNbOYnw3BeUHwe87QwfL5IxfKhS1QB0PaC5SAs9He49x/mu8cE2ujComuXxjScH\nT9m0YE8gVTOjRQcXGaM8tYFEuYlQXA6ibYTgz/XsOP2zrCFP3o17psANoGAwV9LI\nqHQQGbe5k1qr+AjhuoKUowDfIAOo9AcEVY3oF9Rai4D7688/5N92LDAjsPT9b8+J\n1W6GNgOKADbaXDvaAl86HkI4n041B/D7HUzxJIJdeQKBgQDm6/wtNoxhduKOsIsX\nZopBIdEIThq5nYoTJBRzdS+lCTPt56mCrvIT4bEIYeobfwLuf+hsA00wa0CrEN96\nbSxKNnjOmJSrLan2W8zPesY7l5XCSjLZZasq3naiI1LFFKP2bdVfe6GEvwfrhA/M\nWXG31f6vt2rOyWKlMC/9VFdC5wKBgQDBQqScOrV7jxQFWZSyyvWh9qqbQRBz1tUu\n1WE8QFuWbNaCMWt6R10xvmV5D5mCozJpuAkZS48NSvsFX9DptCTSSuEsxayhjiSA\n8ntmyPQl9nKB+bb3/tpmUPPFHPXD1EmbFHvZvwofvVqXatNSMLdfpazaihMdmhZ3\nCS14UaY2+QKBgEOCyn8Na40zDJla089Lky/niw06iGWrwSpHahM3N26wehYbnFsw\nemWFnhQtTBwtzdWcX370mCSHtqhMjolkUYaA1mDQCubgusfjnsUpx7q0Xnwm5SbZ\nqmkmENjmKtSjbCwngDIiGt6MWuxn95Zur+hnD8afgQJjrgtNQzp05e4RAoGAY7XT\nojt0KSS/6qa2XqzyoLbYfTPLnkioQvqaqXB3EJxk7FU9I6CwR5r5VcWjqVA0EXF/\nWEqwquYVr0cpTXrBSLKTjPsMP2pMES+KVZS2yuNlXwQMz9Twr7tymi9/6aKcu2ON\nJuI3Afs7Q0Y9c3lpEvMyxKpahHpcvtvAVwShYlkCgYBHlMpE2+WOzcRN1gbfrIBp\nxZPR9rXrEx0O9mPcHQQ3FlovN6MhhrskyjBHPTgX3nJ1c8PhpcZEazTgx9tSBQID\ne+oa2wqijHz/53z9pBOMQ4DUlKt2zSsfFFlFlkdhUwJVPtwif5lEUgcjbay4OTsU\ntnLQ0Gi+HCoKlVHSSigIEw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-7enht@project-gis-2192c.iam.gserviceaccount.com",
+  "client_id": "107853651810779482698",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-7enht%40project-gis-2192c.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
