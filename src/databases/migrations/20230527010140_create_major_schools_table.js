@@ -6,7 +6,7 @@ exports.up = function(knex) {
     return knex.schema.createTable('major_schools', table => {
         table.increments('id'),
         table.integer('major_id').unsigned().references('id').inTable('majors').onDelete('CASCADE'),
-        table.integer('list_school_id').unsigned().references('id').inTable('list_schools').onDelete('CASCADE'),
+        table.integer('school_id').unsigned().references('id').inTable('list_schools').onDelete('CASCADE'),
         table.timestamps(true, true)
     })
 };
