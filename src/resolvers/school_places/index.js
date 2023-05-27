@@ -136,6 +136,71 @@ module.exports = {
             })
         }
     },
+    updateSchoolPlace: async (req, res) => {
+        const { name, address, accreditation, since, curriculum, latitude, longitude, major, marker_id, name_headmaster, count_class, count_student, description } = req.body
+        const { slug } = req.params
+        try {
+            const list_schools = await knex('list_schools').where({ slug }).first()
+            console.log(list_schools)
+            if (!list_schools) return res.status(400).json({ message: 'School Not Found' })
+            let urlImageLogo = list_schools.logo
+            let urlImageSchool = list_schools.image
+            if (req.files) {
+                if (req.files.logo) {
+                    let textLogo = list_schools.logo.split('https://firebasestorage.googleapis.com/v0/b/project-gis-2192c.appspot.com/o/logo%2F')
+                    textLogo = textLogo[1].split('?alt=media&token=')
+                    const filenameLogo = textLogo[0]
+                    deleteImageLogo(filenameLogo)
+                    const imageLogo = uploadImageLogo(req.files.logo[0].path, req.files.logo[0].filename + '-' + req.files.logo[0].originalname)
+                    urlImageLogo = imageLogo.url + req.files.logo[0].filename + '-' + req.files.logo[0].originalname + '?alt=media' + '&token=' + imageLogo.token;
+                }
+                if (req.files.image) {
+                    let textSchool = list_schools.image.split('https://firebasestorage.googleapis.com/v0/b/project-gis-2192c.appspot.com/o/school%2F')
+                    textSchool = textSchool[1].split('?alt=media&token=')
+                    const filenameSchool = textSchool[0]
+                    deleteImageSchool(filenameSchool)
+                    const imageSchool = uploadImageSchool(req.files.image[0].path, req.files.image[0].filename + '-' + req.files.image[0].originalname)
+                    urlImageSchool = imageSchool.url + req.files.image[0].filename + '-' + req.files.image[0].originalname + '?alt=media' + '&token=' + imageSchool.token;
+                }
+            }
+            const slug_school = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
+            await knex('list_schools').where({ slug }).update({
+                slug: slug_school,
+                name,
+                address,
+                accreditation,
+                since,
+                curriculum,
+                latitude,
+                longitude,
+                logo: urlImageLogo,
+                image: urlImageSchool
+            })
+            await knex('major_schools').where({ school_id: list_schools.id }).del()
+            major.map(async (item) => {
+                await knex('major_schools').insert({
+                    school_id: list_schools.id,
+                    major_id: item
+                })
+            })
+            await knex('detail_schools').where({ school_id: list_schools.id }).update({
+                name_headmaster,
+                count_class,
+                count_student,
+                description
+            })
+            await knex('marker_schools').where({ school_id: list_schools.id }).update({
+                marker_id
+            })
+            return res.status(200).json({
+                message: 'Update School Place Success'
+            })
+        } catch (error) {
+            res.status(500).json({ 
+                message: error.message 
+            })
+        }
+    },
     deleteSchoolPlace: async (req, res) => {
         const { slug } = req.params
         try {
