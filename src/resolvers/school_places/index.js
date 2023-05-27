@@ -1,5 +1,5 @@
 const knex = require('../../databases')
-const { uploadImageSchool, uploadImageLogo } = require('../../utils/storages')
+const { uploadImageSchool, uploadImageLogo, deleteImageLogo, deleteImageSchool } = require('../../utils/storages')
 
 module.exports = {
     createSchoolPlace: async (req, res) => {
@@ -129,6 +129,32 @@ module.exports = {
                 deskripsi: detail_schools.description,
                 logo: list_schools.logo,
                 image: list_schools.image
+            })
+        } catch (error) {
+            res.status(500).json({ 
+                message: error.message 
+            })
+        }
+    },
+    deleteSchoolPlace: async (req, res) => {
+        const { slug } = req.params
+        try {
+            const list_schools = await knex('list_schools').where({ slug }).first()
+            if (!list_schools) return res.status(400).json({ message: 'School Not Found' })
+            let textLogo = list_schools.logo.split('https://firebasestorage.googleapis.com/v0/b/project-gis-2192c.appspot.com/o/logo%2F')
+            textLogo = textLogo[1].split('?alt=media&token=')
+            const filenameLogo = textLogo[0]
+            let textSchool = list_schools.image.split('https://firebasestorage.googleapis.com/v0/b/project-gis-2192c.appspot.com/o/school%2F')
+            textSchool = textSchool[1].split('?alt=media&token=')
+            const filenameSchool = textSchool[0]
+            deleteImageLogo(filenameLogo)
+            deleteImageSchool(filenameSchool)
+            await knex('detail_schools').where({ school_id: list_schools.id }).del()
+            await knex('major_schools').where({ school_id: list_schools.id }).del()
+            await knex('marker_schools').where({ school_id: list_schools.id }).del()
+            await knex('list_schools').where({ slug }).del()
+            return res.status(200).json({
+                message: 'Delete School Place Success'
             })
         } catch (error) {
             res.status(500).json({ 

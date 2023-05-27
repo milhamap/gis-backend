@@ -45,7 +45,21 @@ const uploadImageLogo = (path, filename) => {
     }
 }
 
+const deleteImageSchool = (filename) => {
+    bucket.deleteFiles({
+        prefix: `school/${filename}`
+    })
+}
+
+const deleteImageLogo = (filename) => {
+    bucket.deleteFiles({
+        prefix: `logo/${filename}`
+    })
+}
+
 module.exports = {
     uploadImageSchool,
-    uploadImageLogo
+    uploadImageLogo,
+    deleteImageSchool,
+    deleteImageLogo
 }
