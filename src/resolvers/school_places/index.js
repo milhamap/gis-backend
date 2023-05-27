@@ -54,46 +54,49 @@ module.exports = {
         try {
             const list = knex('list_schools')
             !name ? list : list.where('name', 'like', `%${name}%`)
-            let skemaFeatures = []
             const list_schools = await list
             if (list_schools.length === 0) return res.status(400).json({ message: 'School is Empty' })
-            list_schools.map(async (item) => {
-                const detail_schools = await knex('detail_schools').where({ school_id: item.id }).first()
-                const marker_schools = await knex('marker_schools').where({ school_id: item.id }).first()
-                const marker = await knex('markers').where({ id: marker_schools.marker_id }).first()
-                const major_schools = await knex('major_schools').where({ school_id: item.id })
-                let major = []
-                if (major_schools.length > 0) {
-                    major = await knex('majors').whereIn('id', major_schools.map(item => item.major_id))
-                }
-                skemaFeatures.push({
-                    type: "Feature",
-                    slug: item.slug,
-                    properties: {
-                        id: item.id,
-                        nama_sekolah: item.name,
-                        alamat: item.address,
-                        akreditasi: item.accreditation,
-                        tahun_didirikan: item.since,
-                        kurikulum: item.curriculum,
-                        kepala_sekolah: detail_schools.name_headmaster,
-                        jumlah_kelas: detail_schools.count_class,
-                        jurusan: major.map(item => item.name),
-                        jumlah_siswa: detail_schools.count_student,
-                        marker: marker.name,
-                        deskripsi: detail_schools.description,
-                        logo: item.logo,
-                        image: item.image
-                    },
-                    geometry: {
-                        type: "Point",
-                        coordinates: [item.longitude, item.latitude]
+            const features = await Promise.all(
+                list_schools.map(async (item) => {
+                    const detail_schools = await knex('detail_schools').where({ school_id: item.id }).first();
+                    const marker_schools = await knex('marker_schools').where({ school_id: item.id }).first();
+                    const marker = await knex('markers').where({ id: marker_schools.marker_id }).first();
+                    const major_schools = await knex('major_schools').where({ school_id: item.id });
+            
+                    let major = [];
+                    if (major_schools.length > 0) {
+                        major = await knex('majors').whereIn('id', major_schools.map((item) => item.major_id));
                     }
+            
+                    return {
+                        type: 'Feature',
+                        slug: item.slug,
+                        properties: {
+                            id: item.id,
+                            nama_sekolah: item.name,
+                            alamat: item.address,
+                            akreditasi: item.accreditation,
+                            tahun_didirikan: item.since,
+                            kurikulum: item.curriculum,
+                            kepala_sekolah: detail_schools.name_headmaster,
+                            jumlah_kelas: detail_schools.count_class,
+                            jurusan: major.map((item) => item.name),
+                            jumlah_siswa: detail_schools.count_student,
+                            marker: marker.name,
+                            deskripsi: detail_schools.description,
+                            logo: item.logo,
+                            image: item.image,
+                        },
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [item.longitude, item.latitude],
+                        },
+                    };
                 })
-                return res.status(200).json({
-                    type: "FeatureCollection",
-                    features: skemaFeatures
-                })
+            );
+            return res.status(200).json({
+                type: "FeatureCollection",
+                features
             })
         } catch (error) {
             res.status(500).json({ 
