@@ -1,10 +1,14 @@
 const knex = require('../../databases')
 const { uploadImageSchool, uploadImageLogo, deleteImageLogo, deleteImageSchool } = require('../../utils/storages')
+const { validationResult } = require('express-validator')
+
 
 module.exports = {
     createSchoolPlace: async (req, res) => {
         const { name, address, accreditation, since, curriculum, latitude, longitude, major, marker_id, name_headmaster, count_class, count_student, description } = req.body
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
             const imageLogo = uploadImageLogo(req.files.logo[0].path, req.files.logo[0].filename + '-' + req.files.logo[0].originalname)
             const urlImageLogo = imageLogo.url + req.files.logo[0].filename + '-' + req.files.logo[0].originalname + '?alt=media' + '&token=' + imageLogo.token;
             const imageSchool = uploadImageSchool(req.files.image[0].path, req.files.image[0].filename + '-' + req.files.image[0].originalname)
@@ -143,6 +147,8 @@ module.exports = {
         const { name, address, accreditation, since, curriculum, latitude, longitude, major, marker_id, name_headmaster, count_class, count_student, description } = req.body
         const { slug } = req.params
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
             const list_schools = await knex('list_schools').where({ slug }).first()
             console.log(list_schools)
             if (!list_schools) return res.status(400).json({ message: 'School Not Found' })
@@ -207,6 +213,8 @@ module.exports = {
     deleteSchoolPlace: async (req, res) => {
         const { slug } = req.params
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
             const list_schools = await knex('list_schools').where({ slug }).first()
             if (!list_schools) return res.status(400).json({ message: 'School Not Found' })
             let textLogo = list_schools.logo.split('https://firebasestorage.googleapis.com/v0/b/project-gis-2192c.appspot.com/o/logo%2F')

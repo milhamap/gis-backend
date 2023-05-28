@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createSchoolPlace, getsSchoolPlace, getSchoolPlace, updateSchoolPlace, deleteSchoolPlace } = require('../../resolvers/school_places');
+const { postSchoolPlace } = require('../../utils/validators/school_place')
 const { fileStorage, fileFilter } = require('../../utils/files');
 const { isAdmin } = require('../../middlewares');
 const multer = require('multer');
@@ -15,10 +16,10 @@ const upload = multer({
         { name: 'logo', maxCount: 1 }
     ])
 
-router.post('/', upload, isAdmin, createSchoolPlace);
+router.post('/', postSchoolPlace, upload, isAdmin, createSchoolPlace);
 router.get('/', getsSchoolPlace);
 router.get('/:slug', getSchoolPlace);
-router.put('/:slug', upload, isAdmin, updateSchoolPlace);
+router.put('/:slug', postSchoolPlace, upload, isAdmin, updateSchoolPlace);
 router.delete('/:slug', isAdmin, deleteSchoolPlace);
 
 module.exports = router;

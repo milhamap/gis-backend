@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const knex = require('../../databases')
 const { validationResult } = require('express-validator')
 const { createUserToken, createRefreshToken } = require('../../helpers/tokens')
