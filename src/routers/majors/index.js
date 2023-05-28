@@ -4,6 +4,6 @@ const { createMajor, getsMajor } = require('../../resolvers/majors');
 const { isAdmin } = require('../../middlewares');
 
 router.post('/', isAdmin, createMajor);
-router.get('/', isAdmin, getsMajor);
+router.get('/', getsMajor);
 
 module.exports = router;

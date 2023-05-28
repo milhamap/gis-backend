@@ -4,6 +4,6 @@ const { createMarker, getsMarker } = require('../../resolvers/markers');
 const { isAdmin } = require('../../middlewares');
 
 router.post('/', isAdmin, createMarker);
-router.get('/', isAdmin, getsMarker);
+router.get('/', getsMarker);
 
 module.exports = router;
