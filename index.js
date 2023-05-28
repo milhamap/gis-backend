@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-const cors = require('cors')
+// const cors = require('cors')
 
 const app = express()
 
@@ -9,7 +9,7 @@ const schoolPlaceRouter = require('./src/routers/school_places')
 const majorRouter = require('./src/routers/majors')
 const markerRouter = require('./src/routers/markers')
 
-app.use(cors())
+// app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
