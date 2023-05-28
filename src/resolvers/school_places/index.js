@@ -174,6 +174,18 @@ module.exports = {
                     urlImageSchool = imageSchool.url + req.files.image[0].filename + '-' + req.files.image[0].originalname + '?alt=media' + '&token=' + imageSchool.token;
                 }
             }
+            if (name === list_schools.name) {
+                await knex('list_schools').where({ slug }).update({
+                    address,
+                    accreditation,
+                    since,
+                    curriculum,
+                    latitude,
+                    longitude,
+                    logo: urlImageLogo,
+                    image: urlImageSchool
+                })    
+            }
             const slug_school = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
             await knex('list_schools').where({ slug }).update({
                 slug: slug_school,

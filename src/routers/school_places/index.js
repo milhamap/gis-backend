@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createSchoolPlace, getsSchoolPlace, getSchoolPlace, updateSchoolPlace, deleteSchoolPlace } = require('../../resolvers/school_places');
-const { postSchoolPlace } = require('../../utils/validators/school_place')
+// const { postSchoolPlace } = require('../../utils/validators/school_place')
 const { fileStorage, fileFilter } = require('../../utils/files');
 const { isAdmin } = require('../../middlewares');
 const multer = require('multer');
