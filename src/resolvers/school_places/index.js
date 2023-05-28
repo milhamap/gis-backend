@@ -60,9 +60,7 @@ module.exports = {
                 list_schools.map(async (item) => {
                     const detail_schools = await knex('detail_schools').where({ school_id: item.id }).first();
                     const marker_schools = await knex('marker_schools').where({ school_id: item.id }).first();
-                    console.log('marker_schools: ' + marker_schools)
                     const marker = await knex('markers').where({ id: marker_schools.marker_id }).first();
-                    console.log('marker: ' + marker)
                     const major_schools = await knex('major_schools').where({ school_id: item.id });
             
                     let major = [];
