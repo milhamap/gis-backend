@@ -132,7 +132,7 @@ module.exports = {
                 jumlah_kelas: detail_schools.count_class,
                 jurusan: major.map(item => ({ id: item.id, name: item.name })),
                 jumlah_siswa: detail_schools.count_student,
-                marker: marker.name,
+                marker: marker,
                 deskripsi: detail_schools.description,
                 logo: list_schools.logo,
                 image: list_schools.image
