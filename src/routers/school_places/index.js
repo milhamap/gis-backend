@@ -16,10 +16,10 @@ const upload = multer({
         { name: 'logo', maxCount: 1 }
     ])
 
-router.post('/', postSchoolPlace, upload, isAdmin, createSchoolPlace);
+router.post('/', upload, isAdmin, createSchoolPlace);
 router.get('/', getsSchoolPlace);
 router.get('/:slug', getSchoolPlace);
-router.put('/:slug', postSchoolPlace, upload, isAdmin, updateSchoolPlace);
+router.put('/:slug', upload, isAdmin, updateSchoolPlace);
 router.delete('/:slug', isAdmin, deleteSchoolPlace);
 
 module.exports = router;
