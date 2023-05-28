@@ -52,6 +52,7 @@ module.exports = {
     getsSchoolPlace: async (req, res) => {
         const name = req.query.name
         try {
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
             const list = knex('list_schools')
             !name ? list : list.where('name', 'like', `%${name}%`)
             const list_schools = await list
