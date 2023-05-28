@@ -185,20 +185,21 @@ module.exports = {
                     logo: urlImageLogo,
                     image: urlImageSchool
                 })    
+            } else {
+                const slug_school = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
+                await knex('list_schools').where({ slug }).update({
+                    slug: slug_school,
+                    name,
+                    address,
+                    accreditation,
+                    since,
+                    curriculum,
+                    latitude,
+                    longitude,
+                    logo: urlImageLogo,
+                    image: urlImageSchool
+                })
             }
-            const slug_school = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
-            await knex('list_schools').where({ slug }).update({
-                slug: slug_school,
-                name,
-                address,
-                accreditation,
-                since,
-                curriculum,
-                latitude,
-                longitude,
-                logo: urlImageLogo,
-                image: urlImageSchool
-            })
             await knex('major_schools').where({ school_id: list_schools.id }).del()
             major.map(async (item) => {
                 await knex('major_schools').insert({
