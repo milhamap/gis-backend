@@ -130,7 +130,7 @@ module.exports = {
                 kurikulum: list_schools.curriculum,
                 kepala_sekolah: detail_schools.name_headmaster,
                 jumlah_kelas: detail_schools.count_class,
-                jurusan: major.map(item => item.name),
+                jurusan: major.map(item => ({ id: item.id, name: item.name })),
                 jumlah_siswa: detail_schools.count_student,
                 marker: marker.name,
                 deskripsi: detail_schools.description,
